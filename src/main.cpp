@@ -13,13 +13,16 @@ int main()
             switch (status)
             {
             case WatcherStatus::created:
+                system("echo 'Hello `create` from command'");
                 std::cout << "File created: " << path_to_watch << '\n';
                 break;
 
             case WatcherStatus::modified:
+                system("echo 'Hello `modify` from command'");
                 std::cout << "File modified: " << path_to_watch << '\n';
                 break;
-            case WatcherStatus::erased: 
+            case WatcherStatus::erased:
+                system("echo 'Hello `erase` from command'");
                 std::cout << "File erased: " << path_to_watch << '\n';
                 break;
             default:

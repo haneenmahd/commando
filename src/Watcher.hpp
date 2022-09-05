@@ -1,88 +1,88 @@
-#pragma once
-
-#include <filesystem>
+#include <iostream>
 #include <chrono>
-#include <thread>
-#include <unordered_map>
-#include <string>
-#include <functional>
+#include <sys/stat.h>
+#include "DirectoryWatcher.hpp"
+#include "FileWatcher.hpp"
+#include "WatcherStatus.hpp"
 
-enum WatcherStatus
+enum WatcherTargetType
 {
-    created,
-    modified,
-    erased
+    file,
+    directory,
+    symlink,
+    unknown
 };
 
 class Watcher
 {
 public:
-    std::string path_to_watch;
-    std::chrono::duration<int, std::milli> delay;
+    WatcherTargetType targetType;
+    FileWatcher fw;
+    DirectoryWatcher dw;
 
-    Watcher(std::string path_to_watch, std::chrono::duration<int, std::milli> delay)
+    Watcher(std::string path_To_watch, std::chrono::duration<int, std::milli> delay)
     {
-        this->path_to_watch = path_to_watch;
-        this->delay = delay;
-        
-        for (auto &file : std::filesystem::recursive_directory_iterator(path_to_watch))
+        targetType = findTargetType(path_To_watch);
+
+        if (targetType == file)
         {
-            paths_[file.path().string()] = std::filesystem::last_write_time(file);
+            fw = FileWatcher{path_To_watch, delay};
+
+            std::cout << fw.file_to_watch << std::endl;
         }
-    }
+        else if (targetType == directory)
+        {
+            dw = DirectoryWatcher{path_To_watch, delay};
+        }
+        else
+        {
+            std::cout << "Sorry, symlinks or unknown file types are not supported as of now. :>" << std::endl;
+
+            exit(EXIT_FAILURE);
+        }
+    };
 
     void start(const std::function<void(std::string, WatcherStatus)> &action)
     {
-        while (running_)
+        if (targetType == file)
         {
-            // Wait for delay
-            std::this_thread::sleep_for(delay);
-
-            auto it = paths_.begin();
-            while (it != paths_.end())
-            {
-                if (!std::filesystem::exists(it->first))
-                {
-                    it = paths_.erase(it);
-                    action(it->first, WatcherStatus::erased);
-                }
-                else
-                {
-                    it++;
-                }
-            }
-
-            // Check if a file was created or modified
-            for (auto &file : std::filesystem::recursive_directory_iterator(path_to_watch))
-            {
-                auto current_file_last_write_time = std::filesystem::last_write_time(file);
-
-                // File creation
-                if (!contains(file.path().string()))
-                {
-                    paths_[file.path().string()] = current_file_last_write_time;
-                    action(file.path().string(), WatcherStatus::created);
-                }
-                // File modified
-                else
-                {
-                    if (paths_[file.path().string()] != current_file_last_write_time)
-                    {
-                        paths_[file.path().string()] = current_file_last_write_time;
-                        action(file.path().string(), WatcherStatus::modified);
-                    }
-                }
-            }
+            fw.start(action);
+        }
+        else
+        {
+            dw.start(action);
         }
     }
 
 private:
-    std::unordered_map<std::string, std::filesystem::file_time_type> paths_;
-    bool running_ = true;
-
-    bool contains(const std::string &key)
+    WatcherTargetType findTargetType(std::string path_to_watch)
     {
-        auto el = paths_.find(key);
-        return el != paths_.end();
+        struct stat status;
+
+        if (lstat(path_to_watch.c_str(), &status) == 0)
+        {
+            if (S_ISDIR(status.st_mode))
+            {
+                return directory;
+            }
+            else if (S_ISREG(status.st_mode))
+            {
+                // file
+                return file;
+            }
+            else if (S_ISLNK(status.st_mode))
+            {
+                // symlink
+                return symlink;
+            } else {
+                std::cout << "The target: " << path_to_watch << " has a unknown file kind, which is currently not supported by watcher. If you're wondering why it is not supported, it is because this might result in unexpected bugs in the program." << std::endl;
+
+                exit(EXIT_FAILURE);
+                
+                return unknown;
+            }
+        }
+
+        return unknown;
     }
 };
