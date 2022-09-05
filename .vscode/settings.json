@@ -70,6 +70,13 @@
     "algorithm": "cpp",
     "functional": "cpp",
     "iterator": "cpp",
-    "utility": "cpp"
+    "utility": "cpp",
+    "__tree": "cpp",
+    "any": "cpp",
+    "forward_list": "cpp",
+    "map": "cpp",
+    "numeric": "cpp",
+    "ranges": "cpp",
+    "valarray": "cpp"
   }
 }
