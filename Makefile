@@ -5,7 +5,7 @@ CPP_STANDARD := c++17
 ARGS := -Wall -Wextra -Wpedantic -Wenum-compare
 OUTPUT_FILE := ./build/watcher
 
-.PHONY: build
+.PHONY: test
 
 build:	
 	[ -d build ] || mkdir build 
