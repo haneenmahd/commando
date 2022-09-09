@@ -5,9 +5,14 @@ CPP_STANDARD := c++17
 ARGS := -Wall -Wextra -Wpedantic -Wenum-compare
 OUTPUT_FILE := ./build/watcher
 
-.PHONY: test
+.PHONY: clean-build, test
 
 build:	
+	[ -d build ] || mkdir build 
+	
+	$(CC) $(TARGET_FILE) -I/usr/local/include -I$(INCLUDE_DIR) --std=$(CPP_STANDARD) $(ARGS) -o $(OUTPUT_FILE)
+
+clean-build:
 	[ -d build ] || mkdir build 
 	
 	$(CC) $(TARGET_FILE) -I/usr/local/include -I$(INCLUDE_DIR) --std=$(CPP_STANDARD) $(ARGS) -o $(OUTPUT_FILE)
