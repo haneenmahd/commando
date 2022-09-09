@@ -1,7 +1,7 @@
 {
     "projectName": "Hello",
-    "target": "src/",
-    "createdCommand": "",
-    "modifiedCommand": "",
-    "erasedCommand": ""
+    "target": "test/",
+    "createdCommand": "echo 'create'",
+    "modifiedCommand": "echo 'modify'",
+    "erasedCommand": "echo 'erase'"
 }
