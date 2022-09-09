@@ -1,7 +1,7 @@
 {
-    "projectName": "Hello",
-    "target": "test/",
-    "createdCommand": "echo 'create'",
-    "modifiedCommand": "echo 'modify'",
-    "erasedCommand": "echo 'erase'"
+    "projectName": "Watcher",
+    "target": "src/",
+    "createdCommand": "",
+    "modifiedCommand": "make clean-build",
+    "erasedCommand": ""
 }
