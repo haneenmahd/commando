@@ -1,8 +1,8 @@
 CC := clang++
-INCLUDE_DIR := include
+INCLUDE_DIR := ./include
 TARGET_FILE := src/main.cpp
 CPP_STANDARD := c++17
-ARGS := -Wall -Wextra -pedantic -Wenum-compare
+ARGS := -Wall -Wextra -Wpedantic -Wenum-compare
 OUTPUT_FILE := ./build/watcher
 
 .PHONY: build
@@ -10,10 +10,10 @@ OUTPUT_FILE := ./build/watcher
 build:	
 	[ -d build ] || mkdir build 
 	
-	$(CC) $(TARGET_FILE) -I$(INCLUDE_DIR) --std=$(CPP_STANDARD) $(ARGS) -o $(OUTPUT_FILE)
+	$(CC) $(TARGET_FILE) -I/usr/local/include -I$(INCLUDE_DIR) --std=$(CPP_STANDARD) $(ARGS) -o $(OUTPUT_FILE)
 
 test:
-	$(OUTPUT_FILE)
+	$(OUTPUT_FILE) ./watcher.json
 
 ci:
 	make build
