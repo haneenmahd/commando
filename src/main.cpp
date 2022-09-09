@@ -46,7 +46,7 @@ int main(int argc, char* argv[])
     ConfigReader reader;
     Config config = reader.read(WORKING_DIR);
 
-    std::cout << BLUE << "Building Project: " << COLOR_RESET << BOLD << config.projectName << NORMAL << std::endl;
+    std::cout << BLUE << "Project: " << COLOR_RESET << BOLD << config.projectName << NORMAL << std::endl;
     std::cout << RED << "Target location: " << COLOR_RESET << config.target << std::endl;
 
     startWatching(config);
