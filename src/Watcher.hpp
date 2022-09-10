@@ -6,6 +6,7 @@
 #include "DirectoryWatcher.hpp"
 #include "FileWatcher.hpp"
 #include "WatcherStatus.hpp"
+#include "ansi-text/ansi-text.h"
 
 enum WatcherTargetType
 {
@@ -66,15 +67,18 @@ public:
             switch (status)
             {
                 case WatcherStatus::created:
-                system(config.createdCommand.c_str());
+                    std::cout << BOLD << "Running 🔨: " << GREEN << config.createdCommand << NORMAL << std::endl;
+                    system(config.createdCommand.c_str());
                 break;
 
                 case WatcherStatus::modified:
-                system(config.modifiedCommand.c_str());
-                break;
+                    std::cout << BOLD << "Running 🔨: " << GREEN << config.modifiedCommand << NORMAL << std::endl;
+                    system(config.modifiedCommand.c_str());
+                    break;
                 case WatcherStatus::erased:
-                system(config.erasedCommand.c_str());
-                break;
+                    std::cout << BOLD << "Running 🔨: " << GREEN << config.erasedCommand << NORMAL << std::endl;
+                    system(config.erasedCommand.c_str());
+                    break;
                 default:
                 std::cout << "Error! Unknown file status.\n";
             }
