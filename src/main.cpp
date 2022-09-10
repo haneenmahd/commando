@@ -23,5 +23,7 @@ int main(int argc, char* argv[])
     std::cout << BLUE << "Project: " << COLOR_RESET << BOLD << config.projectName << NORMAL << std::endl;
     std::cout << RED << "Target location: " << COLOR_RESET << config.target << std::endl;
 
+    std::cout << std::endl; // make the terminal look clean
+
     Watcher::startWatching(config);
 }
