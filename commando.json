@@ -1,7 +1,5 @@
 {
     "projectName": "commando",
     "target": "src/",
-    "createdCommand": "",
-    "modifiedCommand": "make clean-build",
-    "erasedCommand": ""
+    "modifiedCommand": "make clean-build"
 }
