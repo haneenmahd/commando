@@ -9,6 +9,7 @@
 #include <functional>
 #include <sys/stat.h>
 #include "WatcherStatus.hpp"
+#include "Config.hpp"
 
 class DirectoryWatcher
 {
@@ -43,6 +44,7 @@ public:
                 {
                     action(it->first, WatcherStatus::erased);
                     it = paths_.erase(it);
+                    
                 }
                 else
                 {
