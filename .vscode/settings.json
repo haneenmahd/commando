@@ -78,6 +78,8 @@
     "numeric": "cpp",
     "ranges": "cpp",
     "valarray": "cpp",
-    "fstream": "cpp"
+    "fstream": "cpp",
+    "__availability": "cpp",
+    "__functional_03": "cpp"
   }
 }
