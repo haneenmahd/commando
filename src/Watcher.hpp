@@ -54,6 +54,34 @@ public:
         }
     }
 
+    // function to start observing the filesystem
+    static void startWatching(Config config)
+    {
+        Watcher w{config.target, std::chrono::milliseconds(500)};
+
+        w.start([config](std::string path_to_watch, WatcherStatus status)
+        {
+            if (!std::filesystem::is_regular_file(path_to_watch)) {
+            return;
+        } else {
+            switch (status)
+            {
+                case WatcherStatus::created:
+                system(config.createdCommand.c_str());
+                break;
+
+                case WatcherStatus::modified:
+                system(config.modifiedCommand.c_str());
+                break;
+                case WatcherStatus::erased:
+                system(config.erasedCommand.c_str());
+                break;
+                default:
+                std::cout << "Error! Unknown file status.\n";
+            }
+        } });
+    }
+
 private:
     WatcherTargetType findTargetType(std::string path_to_watch)
     {
