@@ -5,7 +5,7 @@ CPP_STANDARD := c++17
 ARGS := -Wall -Wextra -Wpedantic -Wenum-compare
 OUTPUT_FILE := ./build/commando
 
-.PHONY: clean-build, test
+.PHONY: clean-build, test, dev
 
 build:	
 	[ -d build ] || mkdir build 
@@ -22,4 +22,8 @@ test:
 
 ci:
 	make build
+	make test
+
+dev:
+	make clean-build
 	make test
