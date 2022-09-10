@@ -3,7 +3,7 @@ INCLUDE_DIR := ./include
 TARGET_FILE := src/main.cpp
 CPP_STANDARD := c++17
 ARGS := -Wall -Wextra -Wpedantic -Wenum-compare
-OUTPUT_FILE := ./build/watcher
+OUTPUT_FILE := ./build/commando
 
 .PHONY: clean-build, test
 
@@ -18,7 +18,7 @@ clean-build:
 	$(CC) $(TARGET_FILE) -I/usr/local/include -I$(INCLUDE_DIR) --std=$(CPP_STANDARD) $(ARGS) -o $(OUTPUT_FILE)
 
 test:
-	$(OUTPUT_FILE) ./watcher.json
+	$(OUTPUT_FILE) ./commando.json
 
 ci:
 	make build

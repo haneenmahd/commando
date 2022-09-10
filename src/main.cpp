@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
     {
         std::cout << "You need to specify the location to search for the config file." << std::endl;
         std::cout << std::endl;
-        std::cout << "watcher [config_location], " GREEN << "eg: `watcher ./config.json`" << NORMAL << std::endl;
+        std::cout << "commando [config_location], " GREEN << "eg: `commando ./config.json`" << NORMAL << std::endl;
 
         return EXIT_FAILURE; // exit if there is no target location specified
     }

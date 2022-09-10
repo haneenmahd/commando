@@ -1,5 +1,5 @@
 {
-    "projectName": "Watcher",
+    "projectName": "commando",
     "target": "src/",
     "createdCommand": "",
     "modifiedCommand": "make clean-build",
