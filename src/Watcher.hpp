@@ -67,16 +67,16 @@ public:
             switch (status)
             {
                 case WatcherStatus::created:
-                    std::cout << BOLD << "Running 🔨: " << GREEN << config.createdCommand << NORMAL << std::endl;
+                    std::cout << BOLD << "Running 🛠 : " << GREEN << config.createdCommand << NORMAL << std::endl;
                     system(config.createdCommand.c_str());
                 break;
 
                 case WatcherStatus::modified:
-                    std::cout << BOLD << "Running 🔨: " << GREEN << config.modifiedCommand << NORMAL << std::endl;
+                    std::cout << BOLD << "Running 🔨 : " << GREEN << config.modifiedCommand << NORMAL << std::endl;
                     system(config.modifiedCommand.c_str());
                     break;
                 case WatcherStatus::erased:
-                    std::cout << BOLD << "Running 🔨: " << GREEN << config.erasedCommand << NORMAL << std::endl;
+                    std::cout << BOLD << "Running 🔧 : " << GREEN << config.erasedCommand << NORMAL << std::endl;
                     system(config.erasedCommand.c_str());
                     break;
                 default:
