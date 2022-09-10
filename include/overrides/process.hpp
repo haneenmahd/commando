@@ -8,7 +8,11 @@ class Process {
         if (!command.empty())
         {
             std::cout << BOLD << "Running 🔨: " << GREEN << command << NORMAL << std::endl;
+            std::cout << std::endl;
+
             system(command.c_str());
+            
+            std::cout << std::endl;
         }
     };
 

@@ -21,9 +21,13 @@ int main(int argc, char* argv[])
     Config config = reader.read(WORKING_DIR);
 
     std::cout << BLUE << "Project: " << COLOR_RESET << BOLD << config.projectName << NORMAL << std::endl;
-    std::cout << RED << "Target location: " << COLOR_RESET << config.target << std::endl;
+    std::cout << YELLOW << "Target location: " << COLOR_RESET << config.target << std::endl;
 
-    std::cout << std::endl; // make the terminal look clean
+    std::cout << std::endl;
+
+    std::cout << "🧐 Observing the filesystem" << std::endl;
+
+    std::cout << std::endl;
 
     Watcher::startWatching(config);
 }
