@@ -8,6 +8,7 @@
 #define GREEN "\e[0;32m"
 #define YELLOW "\e[0;33m"
 #define BLUE "\e[0;34m"
+#define GREY "\033[38;2;105;105;105m"
 
 // Background
 #define BLACK_BG "\e[40m"
