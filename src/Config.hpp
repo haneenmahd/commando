@@ -36,7 +36,7 @@ public:
         {
             std::cout << RED_BG << "ERROR" << NORMAL << " You don't have any command specified in the config file." << std::endl;
             std::cout << std::endl;
-            std::cout << "Go ahead and add a '[created|modified|erased]Command' property with a value of the command that is needed to be run inside the config file." << std::endl;
+            std::cout << "Add a '[created|modified|erased]Command' property with a value of the command that should be run inside the config file." << std::endl;
             std::cout << std::endl;
             std::cout << BOLD << "Config File Location: " << NORMAL << GREEN << config_path << NORMAL << std::endl;
 
