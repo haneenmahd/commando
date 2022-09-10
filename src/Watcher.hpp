@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <chrono>
 #include <sys/stat.h>
@@ -59,11 +61,8 @@ public:
     {
         Watcher w{config.target, std::chrono::milliseconds(500)};
 
-        w.start([config](std::string path_to_watch, WatcherStatus status)
+        w.start([config](std::string filename, WatcherStatus status)
         {
-            if (!std::filesystem::is_regular_file(path_to_watch)) {
-            return;
-        } else {
             switch (status)
             {
                 case WatcherStatus::created:
@@ -79,7 +78,7 @@ public:
                 default:
                 std::cout << "Error! Unknown file status.\n";
             }
-        } });
+        });
     }
 
 private:
